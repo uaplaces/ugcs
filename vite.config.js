@@ -7,7 +7,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.js',
-                'resources/js/sign.js',
+                'resources/js/auth.js',
                 'resources/css/app.css',
             ],
             refresh: true

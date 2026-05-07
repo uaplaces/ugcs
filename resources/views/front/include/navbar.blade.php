@@ -7,7 +7,11 @@
         <div class="collapse navbar-collapse ms-4" id="navbarSupportedContent">
             @include('front.include.menu')
             @include('front.include.search')
-            @include('front.include.sign')
+            @auth
+                @include('auth.include.auth')
+            @else
+                @include('auth.include.guest')
+            @endauth
         </div>
     </div>
 </nav>
