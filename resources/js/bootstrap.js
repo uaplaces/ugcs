@@ -1,4 +1,12 @@
-window._ = require('lodash');
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.withCredentials = true;
+/* JQuery */
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+/* Popper */
+import * as Popper from '@popperjs/core';
+window.Popper = Popper;
+
+/* Bootstrap Framework  */
+//import 'bootstrap';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;

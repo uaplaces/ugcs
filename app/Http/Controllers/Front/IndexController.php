@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ViewController;
 use Illuminate\View\View;
 
-class IndexController extends Controller
+class IndexController extends ViewController
 {
     /**
      * @return View
      */
     public function index(): View
     {
-        return view(
-            'front.index',
-            ['lang' => 'en']
-        );
+        return $this->view('front.index');
     }
 }
