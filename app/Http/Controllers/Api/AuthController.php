@@ -11,6 +11,7 @@ use App\Requests\Api\Auth\LoginRequest;
 use App\Models\User;
 use Auth;
 use Lang;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
+        // Подтвердить емейл
+        event(new Registered($user));
+
+        //Auth::login($user);
 
         return response()->json(['success' => true]);
     }

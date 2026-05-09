@@ -34,7 +34,7 @@
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control rounded-3" id="authModalSignupPassword" name="password"
                                placeholder="@lang('front.auth.modal.signup.inputs.password.placeholder')" required>
-                        <label for="authModalSignupPassword">@lang('front.auth.modal.signup.inputs.email.label')</label>
+                        <label for="authModalSignupPassword">@lang('front.auth.modal.signup.inputs.password.label')</label>
                     </div>
 
                     <div class="text-danger mb-3 d-none" id="authModalSignupPasswordConfirmationError"></div>
