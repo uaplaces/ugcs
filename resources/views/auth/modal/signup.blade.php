@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body p-5 pt-0">
 
-                <form method="POST"  action="{{ route('api.auth.signup') }}">
+                <form method="POST"  action="{{ route('api.auth.signup') }}" id="authModalRegisterForm">
 
                     @csrf
 
