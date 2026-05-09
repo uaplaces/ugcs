@@ -1,37 +1,51 @@
-<div class="modal modal-sheet position-static p-4 py-md-5" data-bs-backdrop="false" tabindex="-1" role="dialog" id="authModalRegister">
+<div class="modal modal-sheet position-static p-4 py-md-5" data-bs-backdrop="false" tabindex="-1" role="dialog" id="authModalSignup">
     <div class="modal-dialog">
         <div class="modal-content rounded-4 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
-                <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
+                <h1 class="fw-bold mb-0 fs-2">@lang('front.auth.modal.signup.h1')</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5 pt-0">
 
-                <form method="POST"  action="{{ route('api.auth.signup') }}" id="authModalRegisterForm">
+                <div class="text-danger mb-3 d-none" id="authModalSignupError" data-error="@lang('front.auth.modal.signup.unknown_error')"></div>
+
+                <form method="POST"  action="{{ route('api.auth.signup') }}" id="authModalSignupForm">
 
                     @csrf
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="modalSignupName" name="name" placeholder="" required>
-                        <label for="floatingName">Your name</label>
-                    </div>
+                    <div class="text-danger mb-3 d-none" id="authModalSignupNameError"></div>
 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3" id="modalSignupEmail" name="email" placeholder="name@example.com" required>
-                        <label for="floatingEmail">Email address</label>
+                        <input type="text" class="form-control rounded-3" id="authModalSignupName" name="name"
+                               placeholder="@lang('front.auth.modal.signup.inputs.name.placeholder')" required>
+                        <label for="authModalSignupName">@lang('front.auth.modal.signup.inputs.name.label')</label>
                     </div>
+
+                    <div class="text-danger mb-3 d-none" id="authModalSignupEmailError"></div>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="modalSignupPassword" name="password" placeholder="Password" required>
-                        <label for="floatingPassword">Password</label>
+                        <input type="email" class="form-control rounded-3" id="authModalSignupEmail" name="email"
+                               placeholder="@lang('front.auth.modal.signup.inputs.email.placeholder')" required>
+                        <label for="authModalSignupEmail">@lang('front.auth.modal.signup.inputs.email.label')</label>
                     </div>
+
+                    <div class="text-danger mb-3 d-none" id="authModalSignupPasswordError"></div>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="modalSignupPasswordConfirmation" name="password_confirmation" placeholder="Confirm Password" required>
-                        <label for="floatingPassword">Confirm Password</label>
+                        <input type="password" class="form-control rounded-3" id="authModalSignupPassword" name="password"
+                               placeholder="@lang('front.auth.modal.signup.inputs.password.placeholder')" required>
+                        <label for="authModalSignupPassword">@lang('front.auth.modal.signup.inputs.email.label')</label>
                     </div>
 
-                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+                    <div class="text-danger mb-3 d-none" id="authModalSignupPasswordConfirmationError"></div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3" id="authModalSignupPasswordConfirmation" name="password_confirmation"
+                               placeholder="@lang('front.auth.modal.signup.inputs.password_confirmation.placeholder')" required>
+                        <label for="authModalSignupPasswordConfirmation">@lang('front.auth.modal.signup.inputs.password_confirmation.label')</label>
+                    </div>
+
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">@lang('front.auth.modal.signup.submit')</button>
 
                     <!--
 

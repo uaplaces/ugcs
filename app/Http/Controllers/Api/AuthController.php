@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Requests\Api\Auth\SignupRequest;
-use App\Requests\Api\Auth\loginRequest;
+use App\Requests\Api\Auth\LoginRequest;
+use App\Models\User;
+use Auth;
+use Lang;
 
 class AuthController extends Controller
 {
@@ -14,20 +20,90 @@ class AuthController extends Controller
      */
     public function signup(SignupRequest $request)
     {
-        return response()->json($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+
+        return response()->json(['success' => true]);
     }
 
     /**
-     * @param loginRequest $request
+     * @param LoginRequest $request
      * @return mixed
      */
     public function login(LoginRequest $request)
     {
-        return response()->json($request->all());
+        //
+        $validated = $request->validated();
+
+        //
+        $credentials = [
+            'email' => $validated['email'],
+            'password' => $validated['password']
+        ];
+
+        //
+        $remember = $validated['remember'];
+
+        //
+        if (Auth::attempt($credentials, $remember)) {
+            //
+            $user = Auth::user();
+
+            //
+            if ($user->email_verified_at === null) {
+                $this->forceLogout($request);
+                return $this->setError('verified');
+            } else {
+                $request->session()->regenerate();
+                return response()->json(['success' => true]);
+            }
+        } else {
+            //
+            $user = User::query()->where('email', $validated['email']);
+
+            //
+            if ($user) {
+                return $this->setError('failed');
+            } else {
+                return $this->setError('email');
+            }
+        }
     }
 
-    public function logout()
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request): RedirectResponse
     {
-        return redirect('front.index');
+        $this->forceLogout($request);
+        return redirect(route('index'));
+    }
+
+    /**
+     * @param $request
+     * @return void
+     */
+    protected function forceLogout($request) {
+        Auth::logout($request);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    }
+
+    /**
+     * @param $code
+     * @return mixed
+     */
+    protected function setError($code) {
+        return response()->json([
+            'errors' => [
+                'email' => Lang::get('auth.' . $code)
+            ]
+        ], 422);
     }
 }

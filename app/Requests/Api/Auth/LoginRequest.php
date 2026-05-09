@@ -22,7 +22,7 @@ class LoginRequest extends AjaxRequest
                 'min:6',
                 'max:191'
             ],
-            'remember_me' => [
+            'remember' => [
                 'required',
                 'in:0,1',
             ],

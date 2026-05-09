@@ -2,47 +2,42 @@
     <div class="modal-dialog">
         <div class="modal-content rounded-4 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
-                <h1 class="fw-bold mb-0 fs-2">Log in</h1>
+                <h1 class="fw-bold mb-0 fs-2">@lang('front.auth.modal.login.h1')</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5 pt-0">
 
-                <form class="">
+                <div class="text-danger mb-3 d-none" id="authModalLoginError" data-error="@lang('front.auth.modal.login.unknown_error')"></div>
+
+                <form method="POST"  action="{{ route('api.auth.login') }}" id="authModalLoginForm">
+
+                    @csrf
+
+                    <div class="text-danger mb-3 d-none" id="authModalLoginEmailError"></div>
 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="name@example.com">
-                        <label for="floatingEmail">Email address</label>
+                        <input type="email" class="form-control rounded-3" id="authModalLoginEmail" name="email"
+                               placeholder="@lang('front.auth.modal.login.inputs.email.placeholder')" required>
+                        <label for="authModalLoginEmail">@lang('front.auth.modal.login.inputs.email.label')</label>
                     </div>
+
+                    <div class="text-danger mb-3 d-none" id="authModalLoginPasswordError"></div>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                        <input type="password" class="form-control rounded-3" id="authModalLoginPassword" name="password"
+                               placeholder="@lang('front.auth.modal.login.inputs.password.placeholder')" required>
+                        <label for="authModalLoginPassword">@lang('front.auth.modal.login.inputs.password.label')</label>
                     </div>
 
-                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Log in</button>
+                    <div class="form-check  mb-3">
+                        <input type="hidden" value="1" name="remember">
+                        <input class="form-check-input" type="checkbox" value="1" id="authModalLoginRemember" name="remember" checked>
+                        <label class="form-check-label" for="authModalLoginRemember">
+                            @lang('front.auth.modal.login.inputs.remember.label')
+                        </label>
+                    </div>
 
-                    <!--
-
-                    <hr class="my-4">
-
-                    <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-
-                    <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
-                        <svg class="bi me-1" width="16" height="16" aria-hidden="true"><use xlink:href="#google"></use></svg>
-                        Sign up with Google
-                    </button>
-
-
-                    <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
-                        <svg class="bi me-1" width="16" height="16" aria-hidden="true"><use xlink:href="#facebook"></use></svg>
-                        Sign up with Facebook
-                    </button>
-
-                    <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
-                        <svg class="bi me-1" width="16" height="16" aria-hidden="true"><use xlink:href="#github"></use></svg>
-                        Sign up with GitHub
-                    </button>
-                    -->
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">@lang('front.auth.modal.login.submit')</button>
 
                 </form>
 
