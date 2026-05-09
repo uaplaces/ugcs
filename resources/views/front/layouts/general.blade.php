@@ -10,7 +10,7 @@
         </div>
         @guest
             @include('auth.modal.login')
-            @include('auth.modal.register')
+            @include('auth.modal.signup')
         @endguest
         @vite('resources/js/app.js')
         @stack('scripts')

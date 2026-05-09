@@ -7,25 +7,27 @@
             </div>
             <div class="modal-body p-5 pt-0">
 
-                <form class="">
+                <form method="POST"  action="{{ route('api.auth.signup') }}">
+
+                    @csrf
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="floatingName" placeholder="">
+                        <input type="text" class="form-control rounded-3" id="modalSignupName" name="name" placeholder="" required>
                         <label for="floatingName">Your name</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control rounded-3" id="floatingEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control rounded-3" id="modalSignupEmail" name="email" placeholder="name@example.com" required>
                         <label for="floatingEmail">Email address</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                        <input type="password" class="form-control rounded-3" id="modalSignupPassword" name="password" placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Confirm Password">
+                        <input type="password" class="form-control rounded-3" id="modalSignupPasswordConfirmation" name="password_confirmation" placeholder="Confirm Password" required>
                         <label for="floatingPassword">Confirm Password</label>
                     </div>
 
