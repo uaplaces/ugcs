@@ -14,8 +14,5 @@
         @endguest
         @vite('resources/js/app.js')
         @stack('scripts')
-        @guest
-            @vite('resources/js/auth.js')
-        @endguest
     </body>
 </html>
